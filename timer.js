@@ -36,6 +36,10 @@ function increment() {
 				secs = "0" + secs;
 			}
 
+			if (millis < 10) {
+				millis = "0" + millis;
+			}
+
 			document.getElementById("output").innerHTML = mins + ":" + secs + "." + millis;
 			increment();
 		}, 10)
