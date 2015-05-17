@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-
+ 
 <head>
 	<title>tftimer</title>
-	<style>
-		#output {
-			width: 100px;
-			height: 20px;
-			background-color: #ccc;
-			border: #666;
-		}
-	</style>
-
+	<link rel="stylesheet" type="text/css" href="timer.css">
 	<script src="timer.js"></script>
 </head>
-
+ 
 <body>
-	<h1>tftimer</h1>
+	<div id="options">
+		<h1 id="title">tftimer</h1>
+	</div>
 	<p id="output"></p>
 	<div id="controls">
 		<button id="startPause" onclick="startPause()">Start</button>
