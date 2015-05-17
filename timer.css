@@ -1,0 +1,33 @@
+#options {
+	background-color: #ccc;
+	width: all;
+	height: 80px;
+	line-height: 80px;
+	vertical-align: middle;
+}
+ 
+#title {
+	font-family: sans-serif;
+	color: white;
+	margin-left: 50px;
+}
+ 
+#output {
+	width: 200px;
+	height: 50px;
+	background-color: #ccc;
+	border: #666;
+	font-size: 40px;
+	font-family: sans-serif;
+	text-align: center;
+	margin: auto;
+	margin-top: 100px;
+	vertical-align: middle;
+}
+ 
+#controls {
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	float: left;
+}
