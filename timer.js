@@ -1,3 +1,4 @@
+/*
 var time = 0;
 var running = 0;
 paused = true;
@@ -45,17 +46,33 @@ function increment() {
 		}, 10)
 	}
 }
+*/
 
-document.addEventListener('keyup', function(event) {
-	if (event.keyCode == 32 && running == 0) {
-		running = 1;
-		increment();
-	}
-});
+
+var start = new Date().getTime(),
+    elapsed = '0.0';
 
 document.addEventListener('keydown', function(event) {
-	if (event.keyCode == 32 && running == 1 && paused == false) {
-		running = 0;
-		time = 0;
+	if (event.keyCode == 32) {
+		startTimer();
 	}
-});
+}
+function startTimer() {
+	setInterval(function()
+	{
+	    var time = new Date().getTime() - start;
+	    var secs = Math.floor(time / 1000 % 60);
+	    var millis = time % 1000;
+
+	    if (millis < 100)
+	    {
+	    	millis = "0" + millis;
+	    }
+		if (millis < 10) {
+			millis = "0" + millis;
+				}
+	    // document.getElementById("output").innerHTML = elapsed;
+	    document.getElementById("output").innerHTML = secs + "." + millis;
+	    }
+	}, 10);
+}
