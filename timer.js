@@ -1,16 +1,19 @@
 var output = document.getElementById("output");
-
+var running = false;
+var time = "time";
 
 document.addEventListener("keydown", function(event) {
-	if (event.keyCode == 32) {
+	if (event.keyCode == 32 && !running) {
+		running = true;
 		startTimer();
 	}
-}
-);
+});
 
-var start = new Date().getTime();
 
 function startTimer() {
+
+	var start = new Date().getTime();
+
 	window.setInterval(function()
 	{
 	    var time = new Date().getTime() - start;
@@ -25,4 +28,4 @@ function startTimer() {
 		}
 	    output.innerHTML = secs + "." + millis;
 	    }, 10);
-	};
+};
