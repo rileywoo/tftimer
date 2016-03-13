@@ -9,9 +9,14 @@
 	<div id="options">
 		<h1 id="title">tftimer</h1>
 	</div>
-	<p id="output">Time goes here</p>
-	<script src="timer.js"></script>
-	<div id="controls">
-		<button onclick="reset()">Reset</button>
+	<p id="output">tfti</p>
+	<textarea id="times_list"></textarea>
+	<button id="reset" onclick="reset()">Reset</button>
+	<div id="stats">
+		<p id="best_solve">Best solve: n/a</p>
+		<p id="worst_solve">Worst solve: n/a</p>
+		<p id="best_avg5">Best average of 5: n/a</p>
+		<p id="current_avg5">Current average of 5: n/a</p>
 	</div>
+	<script src="timer.js"></script>
 </body>
