@@ -12,6 +12,8 @@ var bestAvg5 = Number.POSITIVE_INFINITY;
 var bestAvg5Display = document.getElementById("best_avg5");
 var currentAvg5Display = document.getElementById("current_avg5");
 
+scramble();
+
 document.addEventListener("keyup", function(event) {
 	if (event.keyCode == 32 && !running) {
 		running = true;
@@ -31,6 +33,13 @@ function reset() {
 	output.innerHTML = "tfti";
 	times = [];
 	times_list.value = times.toString();
+	bestTime = Number.POSITIVE_INFINITY;
+	bestTimeDisplay.innerHTML = "Best time: n/a";
+	worstTime = -1;
+	worstTimeDisplay.innerHTML = "Worst time: n/a";
+	bestAvg5 = Number.POSITIVE_INFINITY;
+	bestAvg5Display.innerHTML = "Best average of 5: n/a";
+	currentAvg5Display.innerHTML = "Current average of 5: n/a";
 }
 
 function startTimer() {
@@ -67,7 +76,6 @@ function calcStats(value) {
 		bestTime = value;
 		bestTimeDisplay.innerHTML = "Best solve: " + value;
 	}
-	console.log("hi");
 	if (value > worstTime) {
 		worstTime = value;
 		worstTimeDisplay.innerHTML = "Worst solve: " + value;
@@ -78,7 +86,7 @@ function calcStats(value) {
 }
 
 function calcAvg5() {
-	var last_five = times.slice(times.length-5, times.length);
+	var last_five = times.slice(times.length - 5, times.length);
 	var total = 0;
 	var best = parseFloat(last_five[0]);
 	var worst = best;
@@ -92,7 +100,7 @@ function calcAvg5() {
 		total += current_time;
 	}
 	total -= best + worst;
-	var avg5 = total / 3;
+	var avg5 = (total / 3).toFixed(3);
 	console.log(bestAvg5);
 	if (avg5 < bestAvg5) {
 		bestAvg5 = avg5;
