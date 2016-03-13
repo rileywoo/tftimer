@@ -9,6 +9,13 @@
 	<div id="options">
 		<h1 id="title">tftimer</h1>
 	</div>
+	<p id="scrambleText">Scramble goes here</p>
+	<select id="selectedEvent" onchange="button.click()">
+		<option value="2x2">2x2</option>
+		<option value="3x3" selected>3x3</option>
+		<option value="skewb">Skewb</option>
+		<option value="Megaminx">Megaminx</option>
+	</select>
 	<p id="output">tfti</p>
 	<textarea id="times_list"></textarea>
 	<button id="reset" onclick="reset()">Reset</button>
@@ -19,4 +26,5 @@
 		<p id="current_avg5">Current average of 5: n/a</p>
 	</div>
 	<script src="timer.js"></script>
+	<script src="scrambler.js"></script>
 </body>
