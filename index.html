@@ -10,21 +10,25 @@
 		<h1 id="title">tftimer</h1>
 	</div>
 	<p id="scrambleText">Scramble goes here</p>
-	<select id="selectedEvent" onchange="button.click()">
+	<select id="selectedEvent" onchange="scramble()">
 		<option value="2x2">2x2</option>
 		<option value="3x3" selected>3x3</option>
 		<option value="skewb">Skewb</option>
 		<option value="Megaminx">Megaminx</option>
 	</select>
 	<p id="output">tfti</p>
-	<textarea id="times_list"></textarea>
+	<textarea id="times_list"></textarea><br>
 	<button id="reset" onclick="reset()">Reset</button>
 	<div id="stats">
+		<p id="total_solves">Total Solves: 0</p>
 		<p id="best_solve">Best solve: n/a</p>
 		<p id="worst_solve">Worst solve: n/a</p>
 		<p id="best_avg5">Best average of 5: n/a</p>
-		<p id="current_avg5">Current average of 5: n/a</p>
+		<p id="current_avg5">Current average of 12: n/a</p>
+		<p id="best_avg12">Best average of 12: n/a</p>
+		<p id="current_avg12">Current average of 12: n/a</p>
+		<p id="best_avg100">Best average of 100: n/a</p>
+		<p id="current_avg100">Current average of 100: n/a</p>
 	</div>
 	<script src="timer.js"></script>
-	<script src="scrambler.js"></script>
 </body>
