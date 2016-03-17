@@ -9,13 +9,18 @@
 	<div id="options">
 		<h1 id="title">tftimer</h1>
 	</div>
-	<p id="scrambleText">Scramble goes here</p>
+	<button id="last_scramble" onclick="showLastScramble()">Last scramble</button>
+	<button id="use_inspection" onclick="useInspection()">Inspection: Off</button>
 	<select id="selectedEvent" onchange="scramble()">
 		<option value="2x2">2x2</option>
 		<option value="3x3" selected>3x3</option>
 		<option value="skewb">Skewb</option>
 		<option value="Megaminx">Megaminx</option>
 	</select>
+	<button id="plus_two">+2</button>
+	<button id="DNF">DNF</button>
+	<p id="scrambleText">Scramble goes here</p>
+	<p id="lastScrambleText"></p>
 	<p id="output">tfti</p>
 	<textarea id="times_list"></textarea><br>
 	<button id="reset" onclick="reset()">Reset</button>

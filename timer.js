@@ -8,8 +8,13 @@ var bestAvg12Display = document.getElementById("best_avg12");
 var currentAvg12Display = document.getElementById("current_avg12");
 var bestAvg100Display = document.getElementById("best_avg100");
 var currentAvg100Display = document.getElementById("current_avg100");
+var inspectionDisplay = document.getElementById("use_inspection");
+var lastScrambleDisplay = document.getElementById("lastScrambleText");
 var times_list = document.getElementById("times_list");
 var running = false;
+var use_inspection = false
+var lastScramble = "";
+var lastScrambleActual = "";
 var time;
 var times = [];
 var totalSolves = 0;
@@ -19,7 +24,7 @@ var worstTime = -1;
 var bestAvg5 = Number.POSITIVE_INFINITY;
 var bestAvg12 = Number.POSITIVE_INFINITY;
 var best_avg100 = Number.POSITIVE_INFINITY;
-best_averages={ 
+var best_averages={ 
      "best_avg5":Number.POSITIVE_INFINITY, 
      "best_avg12":Number.POSITIVE_INFINITY, 
      "best_avg100":Number.POSITIVE_INFINITY
@@ -38,23 +43,45 @@ document.addEventListener("keyup", function(event) {
 
 document.addEventListener("keydown", function(event) {
 	if (event.keyCode == 32 && running) {
+		lastScrambleDisplay.innerHTML = "";
 		stopTimer();
 	} else if (event.keyCode == 32 && !running) {
 		output.innerHTML = "Ready";
 	}
 });
 
+function showLastScramble() {
+	lastScrambleDisplay.innerHTML = lastScrambleActual;
+}
+
+function useInspection() {
+	if (!use_inspection) {
+		inspectionDisplay.innerHTML = "Inspection: On";
+		use_inspection = true;
+	} else {
+		inspectionDisplay.innerHTML = "Inspection: Off";
+		use_inspection = false;
+	}
+}
+
+function plusTwo() {
+	times[times.length - 1] += 2;
+	times_list.value = times.toString();
+	// working on this later
+}
+
 function reset() {
 	output.innerHTML = "tfti";
 	times = [];
 	times_list.value = times.toString();
+	totalSolves = 0;
 	bestTime = Number.POSITIVE_INFINITY;
-	bestTimeDisplay.innerHTML = "Best time: n/a";
 	worstTime = -1;
-	worstTimeDisplay.innerHTML = "Worst time: n/a";
 	bestAvg5 = Number.POSITIVE_INFINITY;
 	bestAvg12 = Number.POSITIVE_INFINITY;
 	bestAvg100 = Number.POSITIVE_INFINITY;
+	bestTimeDisplay.innerHTML = "Best time: n/a";
+	worstTimeDisplay.innerHTML = "Worst time: n/a";
 	bestAvg5Display.innerHTML = "Best average of 5: n/a";
 	bestAvg12Display.innerHTML = "Best average of 12: n/a";
 	bestAvg100Display.innerHTML = "Best average of 100: n/a";
@@ -62,7 +89,6 @@ function reset() {
 	currentAvg12Display.innerHTML = "Current average of 12: n/a";
 	currentAvg100Display.innerHTML = "Current average of 100: n/a";
 	totalSolvesDisplay.innerHTML = "Total solves: 0";
-
 	scramble();
 }
 
@@ -92,6 +118,7 @@ function stopTimer() {
 	times.push(time);
 	times_list.value = times.toString();
 	calcStats(parseFloat(time));
+	lastScrambleActual = lastScramble;
 	scramble();
 }
 
@@ -114,12 +141,12 @@ function calcStats(value) {
 	if (times.length >= 12) {
 		var avg12 = calcAvg(12);
 		bestAvg12Display.innerHTML = "Best average of 12: " + best_averages["best_avg12"];
-		currentAvg12Display.innerHTML = "Current average of 12: " + avg5;
+		currentAvg12Display.innerHTML = "Current average of 12: " + avg12;
 	}
 	if (times.length >= 100) {
 		var avg100 = calcAvg(100);
 		bestAvg100Display.innerHTML = "Best average of 100: " + best_averages["best_avg100"];
-		currentAvg100Display.innerHTML = "Current average of 100: " + avg5;
+		currentAvg100Display.innerHTML = "Current average of 100: " + avg100;
 	}
 }
 
@@ -233,4 +260,5 @@ function scramble() {
         }
         scrambleText.innerHTML = newScramble;
     }
+    lastScramble = newScramble;
 }

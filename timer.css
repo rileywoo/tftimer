@@ -12,6 +12,36 @@
 	margin-left: 50px;
 }
 
+#last_scramble {
+	margin-top: 12px;
+	margin-left: 500px;
+	position: fixed;
+}
+
+#use_inspection {
+	margin-top: 12px;
+	margin-left: 400px;
+	position: fixed;
+}
+
+#selectedEvent {
+	margin-top: 12px;
+	margin-left: 600px;
+	position: fixed;
+}
+
+#plus_two {
+	margin-top: 12px;
+	margin-left: 700px;
+	position: fixed;
+}
+
+#DNF {
+	margin-top: 12px;
+	margin-left: 740px;
+	position: fixed;
+}
+
 #output {
 	width: 200px;
 	height: 50px;
@@ -36,19 +66,23 @@
 }
 
 #stats {
+	font-family: sans-serif;
 	margin-left: 200px;
 	margin-top: -100px;
 }
 
-#selectedEvent {
-	float: left;
-	margin-top: 50px;
-	margin-left: 20px;
-}
-
 #scrambleText {
+	font-family: sans-serif;
 	text-align: center;
 	float: left;
 	margin-top: 50px;
+	margin-left: 450px;
+}
+
+#lastScrambleText {
+	font-family: sans-serif;
+	text-align: center;
+	float: left;
+	margin-top: -5px;
 	margin-left: 450px;
 }
