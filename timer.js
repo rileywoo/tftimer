@@ -8,6 +8,7 @@ var bestAvg12Display = document.getElementById("best_avg12");
 var currentAvg12Display = document.getElementById("current_avg12");
 var bestAvg100Display = document.getElementById("best_avg100");
 var currentAvg100Display = document.getElementById("current_avg100");
+var currentMeanDisplay = document.getElementById("current_mean");
 var inspectionDisplay = document.getElementById("use_inspection");
 var lastScrambleDisplay = document.getElementById("lastScrambleText");
 var times_list = document.getElementById("times_list");
@@ -20,6 +21,7 @@ var times = [];
 var totalSolves = 0;
 var myVar;
 var bestTime = Number.POSITIVE_INFINITY;
+var oldBestTime = 0;
 var worstTime = -1;
 var bestAvg5 = Number.POSITIVE_INFINITY;
 var bestAvg12 = Number.POSITIVE_INFINITY;
@@ -65,8 +67,9 @@ function useInspection() {
 }
 
 function plusTwo() {
-	times[times.length - 1] += 2;
+	/*times[times.length - 1] = (parseFloat(times[times.length - 1]) + 2).toFixed(3);
 	times_list.value = times.toString();
+	calcStats(times[times.length - 1]);*/
 	// working on this later
 }
 
@@ -80,8 +83,8 @@ function reset() {
 	bestAvg5 = Number.POSITIVE_INFINITY;
 	bestAvg12 = Number.POSITIVE_INFINITY;
 	bestAvg100 = Number.POSITIVE_INFINITY;
-	bestTimeDisplay.innerHTML = "Best time: n/a";
-	worstTimeDisplay.innerHTML = "Worst time: n/a";
+	bestTimeDisplay.innerHTML = "Best solve: n/a";
+	worstTimeDisplay.innerHTML = "Worst solve: n/a";
 	bestAvg5Display.innerHTML = "Best average of 5: n/a";
 	bestAvg12Display.innerHTML = "Best average of 12: n/a";
 	bestAvg100Display.innerHTML = "Best average of 100: n/a";
@@ -89,6 +92,11 @@ function reset() {
 	currentAvg12Display.innerHTML = "Current average of 12: n/a";
 	currentAvg100Display.innerHTML = "Current average of 100: n/a";
 	totalSolvesDisplay.innerHTML = "Total solves: 0";
+	best_averages={ 
+     "best_avg5":Number.POSITIVE_INFINITY, 
+     "best_avg12":Number.POSITIVE_INFINITY, 
+     "best_avg100":Number.POSITIVE_INFINITY
+	};
 	scramble();
 }
 
@@ -117,18 +125,22 @@ function stopTimer() {
 	clearInterval(myVar);
 	times.push(time);
 	times_list.value = times.toString();
+	totalSolves += 1;
+	totalSolvesDisplay.innerHTML = "Total solves: " + totalSolves;
 	calcStats(parseFloat(time));
 	lastScrambleActual = lastScramble;
 	scramble();
 }
 
 function calcStats(value) {
-	totalSolves += 1;
-	totalSolvesDisplay.innerHTML = "Total Solves: " + totalSolves;
 	if (value < bestTime) {
+		oldBestTime = bestTime;
 		bestTime = value;
 		bestTimeDisplay.innerHTML = "Best solve: " + value;
-	}
+	}/* else if (value > oldBestTime) {
+		bestTime = oldBestTime;
+		bestTimeDisplay.innerHTML = "Best solve: " + oldBestTime;
+	}*/
 	if (value > worstTime) {
 		worstTime = value;
 		worstTimeDisplay.innerHTML = "Worst solve: " + value;
@@ -148,6 +160,13 @@ function calcStats(value) {
 		bestAvg100Display.innerHTML = "Best average of 100: " + best_averages["best_avg100"];
 		currentAvg100Display.innerHTML = "Current average of 100: " + avg100;
 	}
+	var total = 0;
+	for (i = 0; i < times.length; i += 1) {
+		var current_time = parseFloat(times[i]);
+		total += current_time;
+	}
+	var mean = (total / times.length).toFixed(3);
+	current_mean.innerHTML = "Current mean: " + mean;
 }
 
 function calcAvg(value) {
@@ -170,32 +189,9 @@ function calcAvg(value) {
 	var avg_name = "best_avg" + value;
 	var bestAvg = best_averages[avg_name];
 	if (avg < bestAvg) {
-		best_averages[avg_name] = avg;
+		best_averages[avg_name] = parseFloat(avg);
 	}
 	return avg;
-}
-
-function calcAvg5() {
-	var last_five = times.slice(times.length - 5, times.length);
-	var total = 0;
-	var best = parseFloat(last_five[0]);
-	var worst = best;
-	for (i = 0; i < last_five.length; i += 1) {
-		var current_time = parseFloat(last_five[i]);
-		if (current_time > worst) {
-			worst = current_time;
-		} else if (current_time < best) {
-			best = current_time;
-		}
-		total += current_time;
-	}
-	total -= best + worst;
-	var avg5 = (total / 3).toFixed(3);
-	if (avg5 < bestAvg5) {
-		bestAvg5 = avg5;
-		bestAvg5Display.innerHTML = "Best average of 5: " + avg5;
-	}
-	currentAvg5Display.innerHTML = "Current average of 5: " + avg5;
 }
 
 function scramble() {
